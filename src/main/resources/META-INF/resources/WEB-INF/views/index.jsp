@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>iChat</title>
 </head>
 <body>
 <fieldset>
@@ -26,7 +26,10 @@
 			url: "polling",
 			success: function(mensagem) {
 				if(mensagem.text != null)
+				{
 					$("#mensagens").append(mensagem.text + "<br>");
+					$("#mensagens").append("<hr>");
+				}
 				poll();
 			},
 			error: function(err) { 
