@@ -15,6 +15,15 @@
 		margin-bottom: 1px;
 	}
 	
+	.esconde
+	{
+		height: 0px;
+		width: 0px;
+	}
+	textarea 
+	{
+  		resize: none;
+	}
 </style>
 
 <title>iChat</title>
