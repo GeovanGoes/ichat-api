@@ -4,48 +4,52 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<fieldset>
-	<legend>Mensagens</legend>
-	<div id="mensagens"></div>
-</fieldset>
-<br>
-<div>
-	Texto: <input type="text" id="text">
-	<button onclick="enviar()">Enviar</button>
-</div>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-<script src="js/jquery-3.0.0.min.js"></script>
-<script>
-	function poll() {
-		$.ajax({ 
-			type: "GET",
-			cache: false,
-			url: "polling",
-			success: function(mensagem) {
-				if(mensagem.text != null)
-					$("#mensagens").append(mensagem.text + "<br>");
-				poll();
-			},
-			error: function(err) { 
-				poll();
-			}
-		});
-	};
-	poll();
+
+<style>
 	
-	function enviar() {
-		$.ajax({ 
-			type: "POST",
-			cache: false,
-			contentType: "application/json",
-			url: "polling",
-			data: JSON.stringify({ "text" : $("#text").val() })
-		});
+	
+	.item-mensagem
+	{
+		margin-bottom: 1px;
 	}
 	
+</style>
+
+<title>iChat</title>
+</head>
+<body>
+
+<div class="container">
+	
+	<h4 class="text-center">Mensagens</h4>
+	
+	<div class="row" id="mensagens">
+	</div>
+
+	<div class="row" id="formulario">
+		<div class="input-group mb-3">
+		  <input type="text" class="form-control" id="text" placeholder="Mensagem..." aria-label="Mensagem..." aria-describedby="button-addon2">
+		  <div class="input-group-append">
+		    <button class="btn btn-outline-success" type="button" id="enviar" onclick="controller.enviar()">Enviar</button>
+		  </div>
+		</div>
+	</div>
+
+</div>
+
+
+<script src="js/jquery-3.0.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="../../js/view/MensagemView.js"></script>
+<script src="../../js/controller/MensagensController.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+
+<script>
+	let controller = new MensagensController();
+	new ClipboardJS('.btn-copy');
 </script>
 </body>
 </html>
